@@ -1,0 +1,92 @@
+
+#
+# 安装ROUGE
+#
+
+1，ROUGE-1.5.5文件夹；
+2，perl，v5.6.0以上，ubuntu自带，perl -v 查看版本；
+
+3，安装XML::DOM
+
+sudo apt-get install  libxml-dom-perl
+或
+sudo cpan XML::DOM
+
+4，安装DB_File
+
+sudo cpan install DB_File
+
+如果出现问题：
+version.c:30:16: fatal error: db.h: No such file or directory
+compilation terminated.
+Makefile:356: recipe for target 'version.o' failed
+make: *** [version.o] Error 1
+  PMQS/DB_File-1.843.tar.gz
+  /usr/bin/make -- NOT OK
+ 
+解决方法：
+ 
+说明未安装Berkeley DB library，或安装不正确。解决方法如下：
+
+sudo apt-get install libdb-dev1
+
+如果还没有用，可能是没有安装对应的版本，先使用
+
+sudo apt-cache search libdb
+
+查看当前Berkeley DB library 的版本，然后再安装对应的版本.
+
+sudo apt-get install libdb5.3-dev
+
+
+5，设置ROUGE环境变量：
+
+sudo gedit etc/profile   # 对所有用户都有效
+sudo gedit ~/.profile     # 仅对当前用户有效
+
+文件末添加：
+export ROUGE_EVAL_HOME="/path/to/ROUGE-1.5.5"
+
+source ~/.profile
+
+
+6，处理WordNet exceptions for ROUGE-1.5.5
+
+cd /path/to/ROUGE-1.5.5/data/WordNet-2.0-Exceptions/
+
+./buildExeptionDB.pl . exc WordNet-2.0.exc.db
+
+cd ../
+
+ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
+
+
+7，安装pyrouge，配置路径：
+
+pip install pyrouge
+pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
+
+8，测试pyrouge
+
+python /path/to/ROUGE_eval/test_pyrouge.py
+
+
+#
+# 可能的问题
+#
+bash: ./xx: Permission denied
+
+可读可写可运行的权限：
+chmod 777 ROUGE-1.5.5.pl
+
+chmod 777 buildExeptionDB.pl
+
+#
+
+The following tests may not succeed,
+but it is OK since pyrouge can be used as /path/to/ROUGE_eval/test_pyrouge.py does.
+
+1, perl /path/to/runROUGE-test.pl
+2, python -m pyrouge.test
+
+#
