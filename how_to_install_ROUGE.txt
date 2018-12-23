@@ -88,7 +88,7 @@ subprocess.CalledProcessError: Command '[ ... ]' returned non-zero exit status 2
 
 WordNet exceptions未处理，
 或者，语言非英语，
-或者，model语句与system语句完全没有相同的token。
+或者，model语句与system语句完全没有相同的词语。
 
 处理WordNet exceptions for ROUGE-1.5.5参见上面第6点，或下面：
 cd /path/to/ROUGE-1.5.5/data/
