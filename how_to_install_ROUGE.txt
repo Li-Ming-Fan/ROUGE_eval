@@ -84,6 +84,17 @@ chmod 777 ROUGE-1.5.5.pl
 chmod 777 buildExeptionDB.pl
 
 #
+subprocess.CalledProcessError: Command '[ ... ]' returned non-zero exit status 255
+
+WordNet exceptions未处理，
+或者，语言非英语。
+
+处理WordNet exceptions for ROUGE-1.5.5参见上面第6点，或下面：
+cd /path/to/ROUGE-1.5.5/data/
+rm WordNet-2.0.exc.db
+./WordNet-2.0-Exceptions/buildExeptionDB.pl ./WordNet-2.0-Exceptions ./smart_common_words.txt ./WordNet-2.0.exc.db
+
+#
 
 The following tests may not succeed,
 but it is OK since pyrouge can be used as /path/to/ROUGE_eval/test_pyrouge.py does.
