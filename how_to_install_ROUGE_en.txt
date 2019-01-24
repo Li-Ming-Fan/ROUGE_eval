@@ -122,7 +122,6 @@ or, the language is not English,
 or, some model-results are empty after filtering punctuations,
 or, some model-results start with the character '<' after filtering punctuations.
 
-
 See above for how to handle WordNet exceptions for ROUGE-1.5.5
 the following is another method (essentially the same): 
 
