@@ -73,7 +73,7 @@ source etc/profile    # make ROUGE effective for all users
 source ~/.profile     # effective only for current user
 
 
-6，handle WordNet exceptions for ROUGE-1.5.5
+6, handle WordNet exceptions for ROUGE-1.5.5
 
 enter the directory: ROUGE-1.5.5/
 cd /path/to/ROUGE-1.5.5/
@@ -92,12 +92,12 @@ create a new soft link:
 ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
 
 
-7，install pyrouge, set ROUGE path for pyrouge：
+7, install pyrouge, set ROUGE path for pyrouge：
 
 pip install pyrouge
 pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
 
-8，test pyrouge
+8, test pyrouge
 
 python /path/to/ROUGE_eval/test_pyrouge.py
 
