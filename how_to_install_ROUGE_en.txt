@@ -2,7 +2,7 @@
 # how to install ROUGE
 #
 
-1, prepare the directory (by clone or download this repo): ROUGE-1.5.5/;
+1, prepare the directory: ROUGE-1.5.5/;
 2, make sure that perl (> v5.6.0) has been installed; run the command to see the version: perl -v
 
 3, install XML::DOM
