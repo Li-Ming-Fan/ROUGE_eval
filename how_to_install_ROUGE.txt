@@ -30,7 +30,7 @@ make: *** [version.o] Error 1
 
 sudo apt-cache search libdb
 
-查看当前Berkeley DB library 的版本，然后再安装对应的版本.
+查看当前Berkeley DB library 的版本，然后再安装对应的版本。
 
 例如：
 
