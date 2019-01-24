@@ -1,0 +1,133 @@
+#
+# how to install ROUGE
+#
+
+1, prepare the directory (by clone or download this repo): ROUGE-1.5.5/;
+2, make sure that perl (> v5.6.0) has been installed; run the command to see the version: perl -v
+
+3, install XML::DOM
+
+sudo apt-get install libxml-dom-perl
+or,
+sudo cpan install XML::DOM
+
+4, install DB_File
+
+sudo cpan install DB_File
+
+If the following occurs:
+
+version.c:30:16: fatal error: db.h: No such file or directory
+compilation terminated.
+Makefile:356: recipe for target 'version.o' failed
+make: *** [version.o] Error 1
+  PMQS/DB_File-1.843.tar.gz
+  /usr/bin/make -- NOT OK
+ 
+Then, Berkeley DB library is not properly installed.
+First check the latest version of Berkeley DB library by:
+
+sudo apt-cache search libdb
+
+the result will be like:
+
+...
+gir1.2-hud-2 - typelib file for libhud2
+gir1.2-hud-client-2 - typelib file for libhud-client-2
+golang-go-dbus-dev - Go interface for D-Bus
+libdb++-dev - Berkeley Database Libraries for C++ [development]
+libdb-dev - Berkeley Database Libraries [development]
+libdb-java-dev - Berkeley Database Libraries for Java [development]
+libdb-sql-dev - Berkeley Database Libraries [SQL development]
+libdb5.3 - Berkeley v5.3 Database Libraries [runtime]
+libdb5.3++ - Berkeley v5.3 Database Libraries for C++ [runtime]
+libdb5.3++-dev - Berkeley v5.3 Database Libraries for C++ [development]
+libdb5.3-dbg - Berkeley v5.3 Database Libraries [debug]
+libdb5.3-dev - Berkeley v5.3 Database Libraries [development]
+libdb5.3-java - Berkeley v5.3 Database Libraries for Java
+libdb5.3-java-dev - Berkeley v5.3 Database Libraries for Java [development]
+libdb5.3-java-gcj - Berkeley v5.3 Database Libraries for Java (native code)
+libdb5.3-java-jni - Berkeley v5.3 Database Libraries for Java
+libdb5.3-sql - Berkeley v5.3 Database Libraries [SQL runtime]
+libdb5.3-sql-dev - Berkeley v5.3 Database Libraries [SQL development]
+libdb5.3-stl - Berkeley v5.3 Database Libraries [STL runtime]
+libdb5.3-stl-dev - Berkeley v5.3 Database Libraries [STL development]
+libdbd-freetds - Freetds database server driver for libdbi
+libdbd-mysql - MySQL database server driver for libdbi
+...
+
+Then install a version of Berkeley Database Libraries, such as:
+
+sudo apt-get install libdb5.3-dev
+
+
+5, set ROUGE environment variable:
+
+sudo vim etc/profile    # make ROUGE effective for all users
+sudo vim ~/.profile     # effective only for current user
+
+append to the end of the file:
+export ROUGE_EVAL_HOME="/path/to/ROUGE-1.5.5"
+
+source etc/profile    # make ROUGE effective for all users
+source ~/.profile     # effective only for current user
+
+
+6，handle WordNet exceptions for ROUGE-1.5.5
+
+enter the directory: ROUGE-1.5.5/
+cd /path/to/ROUGE-1.5.5/
+
+Then:
+cd data/WordNet-2.0-Exceptions/
+
+./buildExeptionDB.pl . exc WordNet-2.0.exc.db
+
+cd ../
+
+remove the existing exceptions file:
+rm WordNet-2.0.exc.db
+
+create a new soft link:
+ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
+
+
+7，install pyrouge, set ROUGE path for pyrouge：
+
+pip install pyrouge
+pyrouge_set_rouge_path /absolute/path/to/ROUGE-1.5.5/directory
+
+8，test pyrouge
+
+python /path/to/ROUGE_eval/test_pyrouge.py
+
+
+#
+# possible problems
+#
+bash: ./xx: Permission denied
+
+permission for read-write-execute:
+
+chmod 777 ROUGE-1.5.5.pl
+
+chmod 777 buildExeptionDB.pl
+
+#
+subprocess.CalledProcessError: Command '[ ... ]' returned non-zero exit status 255
+
+This error occurs if 
+WordNet exceptions has not been processed,
+or, the language is not English,
+or, some model-results are empty after filtering punctuations,
+or, some model-results start with the character '<' after filtering punctuations.
+
+See above for how to handle WordNet exceptions for ROUGE-1.5.5
+the following is another method (essentially the same): 
+
+cd /path/to/ROUGE-1.5.5/data/
+rm WordNet-2.0.exc.db
+./WordNet-2.0-Exceptions/buildExeptionDB.pl ./WordNet-2.0-Exceptions ./smart_common_words.txt ./WordNet-2.0.exc.db
+
+#
+
