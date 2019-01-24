@@ -95,6 +95,7 @@ WordNet exceptions未处理，
 或者，model结果中有些语句过滤掉标点符号后为空，没有词语，
 或者，model结果中有些语句过滤掉标点符号后为空，以及字符'<'开头。
 
+所以如果结果中<unk>可能会的问题，但[unk]不会有问题。
 
 处理WordNet exceptions for ROUGE-1.5.5参见上面第6点，或下面：
 cd /path/to/ROUGE-1.5.5/data/
