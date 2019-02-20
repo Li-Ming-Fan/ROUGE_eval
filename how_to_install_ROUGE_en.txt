@@ -63,14 +63,14 @@ sudo apt-get install libdb5.3-dev
 
 5, set ROUGE environment variable:
 
-sudo vim etc/profile    # make ROUGE effective for all users
-sudo vim ~/.profile     # effective only for current user
+sudo vim /etc/profile    # make ROUGE effective for all users
+vim ~/.profile           # effective only for current user
 
 append to the end of the file:
 export ROUGE_EVAL_HOME="/path/to/ROUGE-1.5.5"
 
-source etc/profile    # make ROUGE effective for all users
-source ~/.profile     # effective only for current user
+source /etc/profile    # make ROUGE effective for all users
+source ~/.profile      # effective only for current user
 
 
 6, handle WordNet exceptions for ROUGE-1.5.5
@@ -83,6 +83,7 @@ cd data/WordNet-2.0-Exceptions/
 
 ./buildExeptionDB.pl . exc WordNet-2.0.exc.db
 
+Then:
 cd ../
 
 remove the existing exceptions file:
