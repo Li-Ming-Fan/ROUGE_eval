@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+test_pyrouge
 
+"""
 
 from pyrouge import Rouge155
+
 
 rg = Rouge155()
 rg.system_dir = './data_result/reference'
