@@ -34,7 +34,7 @@ sudo apt-cache search libdb
 
 例如：
 
-sudo apt-get install libdb5.3-dev
+sudo apt-get install libdb5.3
 
 
 5，设置ROUGE环境变量：
